@@ -34,8 +34,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # -------------------- AWS Setup --------------------
-AWS_REGION = 'ap-south-1'
-SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:905418361023:Travelgo'
+AWS_REGION = 'us-east-1'
+SNS_TOPIC_ARN = 'arn:aws:iam::463470967337:role/EC2_DynamoDB_Role'
 
 dynamodb = boto3.resource('dynamodb', region_name=AWS_REGION)
 orders_table = dynamodb.Table('PickleOrders')
