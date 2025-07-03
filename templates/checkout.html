@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - Home Made Pickles & Snacks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffafc;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+    }
+
+    h2 {
+      color: #d81b60;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    form {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-control {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+
+    .form-control input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .submit-btn {
+      background-color: #ff4081;
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #d81b60;
+    }
+
+    .flash {
+      text-align: center;
+      color: green;
+      margin-bottom: 20px;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .back-link a {
+      color: #d81b60;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Home Made Pickles & Snacks</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/veg">Veg</a>
+    <a href="/nonveg">Non-Veg</a>
+    <a href="/snacks">Snacks</a>
+    <a href="/cart">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Confirm & Place Your Order</h2>
+
+  <p>We’ll ship your order as soon as possible! Please confirm below.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="/checkout">
+    <div class="form-control">
+      <input type="text" name="name" placeholder="Your Full Name" required>
+    </div>
+    <div class="form-control">
+      <input type="email" name="email" placeholder="Your Email Address" required>
+    </div>
+    <div class="form-control">
+      <input type="text" name="address" placeholder="Shipping Address" required>
+    </div>
+    <div class="form-control">
+      <input type="tel" name="phone" placeholder="Contact Number" required>
+    </div>
+    <button class="submit-btn" type="submit">Place Order</button>
+  </form>
+
+  <div class="back-link">
+    <a href="/cart">← Go back to cart</a>
+  </div>
+</div>
+
+</body>
+</html>

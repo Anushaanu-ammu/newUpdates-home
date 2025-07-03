@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Veg Pickles - Home Made Pickles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fffaf0;
+    }
+
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d81b60;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      color: #333;
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 1em;
+    }
+
+    .card .price {
+      font-weight: bold;
+      color: #d81b60;
+      margin: 10px 0;
+    }
+
+    .card a {
+      display: inline-block;
+      background-color: #ff4081;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-bottom: 15px;
+    }
+
+    .card a:hover {
+      background-color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Home Made Veg Pickles
+</header>
+
+<div class="container">
+  <h2>Our Delicious Veg Pickles</h2>
+<div class="grid">
+  {% for pid, item in items.items() %}
+    <div class="card">
+      {% if 'Mango' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/mango.jpg') }}" alt="Mango Pickle">
+      {% elif 'Lemon' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/lemon.jpg') }}" alt="Lemon Pickle">
+      {% elif 'Gongura' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/gongura.jpg') }}" alt="Gongura Pickle">
+      {% else %}
+        <img src="{{ url_for('static', filename='pickels/default.jpg') }}" alt="Veg Pickle">
+      {% endif %}
+      <h3>{{ item.name }}</h3>
+      <p class="price">₹{{ item.price }}</p>
+      <a href="{{ url_for('add_to_cart', pid=pid) }}">Add to Cart</a>
+    </div>
+  {% endfor %}
+</div>
+
+
+</body>
+</html>

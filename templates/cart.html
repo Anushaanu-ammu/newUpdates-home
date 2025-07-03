@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - Home Made Pickles & Snacks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffafc;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+    }
+
+    h2 {
+      color: #d81b60;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #ffe4ec;
+      color: #d81b60;
+    }
+
+    .total {
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .checkout-btn {
+      background-color: #ff4081;
+      color: white;
+    }
+
+    .checkout-btn:hover {
+      background-color: #d81b60;
+    }
+
+    .continue-btn {
+      background-color: #f8bbd0;
+      color: #333;
+    }
+
+    .continue-btn:hover {
+      background-color: #f48fb1;
+    }
+
+    .flash {
+      text-align: center;
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Home Made Pickles & Snacks</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/veg">Veg</a>
+    <a href="/nonveg">Non-Veg</a>
+    <a href="/snacks">Snacks</a>
+    <a href="/cart">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Your Shopping Cart</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% if items %}
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Unit Price</th>
+          <th>Qty</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pid, item in items.items() %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>₹{{ item.price }}</td>
+          <td>{{ item.qty }}</td>
+          <td>₹{{ item.price * item.qty }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="total">Total: ₹{{ total }}</div>
+
+    <div class="btn-group">
+      <a href="/" class="btn continue-btn">← Continue Shopping</a>
+      <a href="/checkout" class="btn checkout-btn">Proceed to Checkout →</a>
+    </div>
+  {% else %}
+    <p style="text-align:center; margin-top:30px;">Your cart is empty. <a href="/">Start shopping</a>!</p>
+  {% endif %}
+</div>
+
+</body>
+</html>

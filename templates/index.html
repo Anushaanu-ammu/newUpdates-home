@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Made Pickles & Snacks — Taste the Best</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffafc;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffb6c1;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: url("{{ url_for('static', filename='images/hero.jpg') }}") center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      background-color: #fce4ec;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #c2185b;
+      margin-bottom: 20px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background-color: #fff0f5;
+      border: 1px solid #ffc0cb;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 6px #e0e0e0;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+      color: #d81b60;
+    }
+
+    .product p {
+      margin: 5px 0;
+      color: #444;
+    }
+
+    .btn {
+      background-color: #ff4081;
+      border: none;
+      padding: 8px 14px;
+      color: white;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #c2185b;
+    }
+
+    .mission, .features {
+      margin-top: 40px;
+    }
+
+    .features ul {
+      list-style-type: none;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .features li::before {
+      content: "✔️ ";
+      color: #d6336c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      background-color: #fff0f5;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        font-size: 1.4rem;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Home Made Pickles & Snacks</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/veg">Veg Pickles</a>
+    <a href="/nonveg">Non-Veg Pickles</a>
+    <a href="/snacks">Snacks</a>
+    <a href="/cart">Cart</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/login">Login</a>
+  </nav>
+</header>
+
+<div class="hero">
+  Preserving Traditions, One Jar at a Time 🍯
+</div>
+
+<div class="container">
+  <h2 class="section-title">Featured Products</h2>
+  <div class="products">
+    {% for pid, item in items.items() %}
+    <div class="product">
+    <img src="{{ url_for('static', filename='pickels/' + pid + '.jpg') }}" alt="{{ item.name }}">
+      <h3>{{ item.name }}</h3>
+      <p>₹{{ item.price }}</p>
+      <p>Stock: {{ item.stock }}</p>
+      <a href="/add/{{ pid }}"><button class="btn">Add to Cart</button></a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mission">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <p>We bring together heritage, technology, and sustainability to craft homemade delicacies with farm-fresh ingredients. No preservatives, just pure taste and tradition.</p>
+  </div>
+
+  <div class="features">
+    <h2 class="section-title">Our Platform Features</h2>
+    <ul>
+      <li>⚙️ Scalable cloud-based order management (AWS EC2)</li>
+      <li>📦 Real-time stock tracking with DynamoDB (or in-memory locally)</li>
+      <li>🛍️ Personalized shopping experience for every user</li>
+      <li>🍃 Sustainable sourcing and eco-friendly packaging</li>
+      <li>📱 Mobile-friendly design with fast performance</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  &copy; {{ year }} Home Made Pickles & Snacks — Taste the Best™
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snacks - Home Made Pickles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff8e1;
+    }
+
+    header {
+      background-color: #ffb74d;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 1.5em;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #e65100;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      color: #333;
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 1em;
+    }
+
+    .card .price {
+      font-weight: bold;
+      color: #ef6c00;
+      margin: 10px 0;
+    }
+
+    .card a {
+      display: inline-block;
+      background-color: #fb8c00;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-bottom: 15px;
+    }
+
+    .card a:hover {
+      background-color: #e65100;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  Crispy & Tasty Snacks
+</header>
+
+<div class="container">
+  <h2>Freshly Made Traditional Snacks</h2>
+
+  <div class="grid">
+  {% for pid, item in items.items() %}
+    <div class="card">
+      {% if 'Murukulu' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/murukulu.jpg') }}" alt="Murukulu">
+      {% elif 'Nippattu' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/nippattu.jpg') }}" alt="Nippattu">
+      {% elif 'Maida' in item.name %}
+        <img src="{{ url_for('static', filename='pickels/hot_maida_biscuit.jpg') }}" alt="Hot Maida Biscuit">
+      {% else %}
+        <img src="{{ url_for('static', filename='pickels/default.jpg') }}" alt="Snack">
+      {% endif %}
+      <h3>{{ item.name }}</h3>
+      <p class="price">₹{{ item.price }}</p>
+      <a href="{{ url_for('add_to_cart', pid=pid) }}">Add to Cart</a>
+    </div>
+  {% endfor %}
+</div>
+
+
+</body>
+</html>

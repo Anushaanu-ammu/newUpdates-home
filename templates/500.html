@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>500 - Server Error</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff5f5;
+      text-align: center;
+      padding: 60px;
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #e53935;
+    }
+
+    p {
+      font-size: 20px;
+      color: #555;
+    }
+
+    a {
+      color: #e91e63;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>500</h1>
+  <p>We're experiencing some technical issues.</p>
+  <p>Please try again later or <a href="{{ url_for('home') }}">go back to Home</a>.</p>
+</body>
+</html>
